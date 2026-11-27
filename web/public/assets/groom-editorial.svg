@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <defs>
+    <linearGradient id="gbg" x1="0" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E6E1D6"/>
+      <stop offset="55%" stop-color="#CFD5C4"/>
+      <stop offset="100%" stop-color="#AEB79F"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.22" r="0.55">
+      <stop offset="0%" stop-color="#FFFDF8" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#FFFDF8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="suit" x1="300" y1="295" x2="300" y2="790" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E2CEBD"/>
+      <stop offset="100%" stop-color="#C9B29F"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#gbg)"/>
+  <rect width="600" height="800" fill="url(#glow)"/>
+  <path d="M0 450 C180 410 380 435 600 395 L600 800 L0 800 Z" fill="#96A188" opacity="0.42"/>
+  <!-- Groom editorial silhouette -->
+  <ellipse cx="300" cy="204" rx="40" ry="48" fill="#3B2C24"/>
+  <circle cx="300" cy="216" r="35" fill="#DFBA9F"/>
+  <path d="M276 250 L324 250 L330 296 L270 296 Z" fill="#DFBA9F"/>
+  <!-- Tailored blush-champagne suit -->
+  <path d="M198 318 C222 288 260 282 300 282 C340 282 378 288 402 318 L434 570 L394 580 L382 790 L218 790 L206 580 L166 570 Z" fill="url(#suit)"/>
+  <!-- Crisp ivory shirt & lapel -->
+  <polygon points="274,284 326,284 300,390" fill="#FFFDF9"/>
+  <path d="M274 284 L250 385 L300 416 L350 385 L326 284" stroke="#B69D88" stroke-width="3" fill="none"/>
+  <!-- Boutonniere -->
+  <circle cx="348" cy="364" r="9" fill="#E9B4C2"/>
+  <circle cx="355" cy="372" r="6" fill="#8FA385"/>
+  <rect x="44" y="44" width="512" height="712" rx="256" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="2"/>
+</svg>

@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="600" y2="800" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#E7EDE4"/>
+      <stop offset="52%" stop-color="#D6DEC8"/>
+      <stop offset="100%" stop-color="#B9C3AC"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0.5" cy="0.24" r="0.55">
+      <stop offset="0%" stop-color="#FFFDF8" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#FFFDF8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dress" x1="300" y1="300" x2="300" y2="780" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#FFFFFF"/>
+      <stop offset="65%" stop-color="#FAF4EE"/>
+      <stop offset="100%" stop-color="#EFE4DC"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="800" fill="url(#bg)"/>
+  <rect width="600" height="800" fill="url(#sun)"/>
+  <!-- Soft highland botanicals -->
+  <path d="M0 440 C130 390 250 430 380 410 C490 395 550 370 600 390 L600 800 L0 800 Z" fill="#9FA991" opacity="0.48"/>
+  <path d="M0 540 C160 510 320 555 600 515 L600 800 L0 800 Z" fill="#829076" opacity="0.4"/>
+  <!-- Editorial bridal silhouette -->
+  <ellipse cx="300" cy="212" rx="44" ry="52" fill="#4A3830"/>
+  <circle cx="300" cy="222" r="36" fill="#E8C5B0"/>
+  <path d="M276 254 C284 274 316 274 324 254 L334 294 L266 294 Z" fill="#E8C5B0"/>
+  <!-- Lace gown bodice & flowing veil -->
+  <path d="M254 292 C275 304 325 304 346 292 L364 415 C325 432 275 432 236 415 Z" fill="url(#dress)"/>
+  <path d="M236 412 C180 545 145 660 128 790 L472 790 C455 660 420 545 364 412 Z" fill="url(#dress)"/>
+  <path d="M242 296 C210 385 182 525 162 690" stroke="#FFFFFF" stroke-width="2" opacity="0.7"/>
+  <path d="M358 296 C390 385 418 525 438 690" stroke="#FFFFFF" stroke-width="2" opacity="0.7"/>
+  <!-- Floral bouquet -->
+  <g transform="translate(388 335)">
+    <circle cx="0" cy="0" r="36" fill="#FFFDF9"/>
+    <circle cx="-16" cy="-12" r="14" fill="#F4CCD5"/>
+    <circle cx="14" cy="-10" r="13" fill="#E9B4C2"/>
+    <circle cx="0" cy="12" r="15" fill="#FAF0E4"/>
+    <circle cx="-20" cy="14" r="11" fill="#A6B79E"/>
+    <circle cx="22" cy="10" r="11" fill="#95AA8D"/>
+  </g>
+  <!-- Editorial framing caption -->
+  <rect x="44" y="44" width="512" height="712" rx="256" stroke="#FFFFFF" stroke-opacity="0.45" stroke-width="2"/>
+</svg>

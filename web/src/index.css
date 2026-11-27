@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --dur-micro: 150ms;
+  --dur-ui: 300ms;
+  --dur-reveal: 700ms;
+  --dur-editorial: 950ms;
+  --dur-svg-draw: 1200ms;
+  --dur-ambient: 7500ms;
+
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-silk: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-tactile: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-ambient: cubic-bezier(0.45, 0.05, 0.55, 0.95);
+}
+
+html {
+  scroll-behavior: auto;
+  overflow-x: clip;
+}
+
+body {
+  background-color: #fffdfc;
+  color: #3c2a12;
+  overflow-x: clip;
+  font-family: 'Poppins', 'Tenor Sans', system-ui, sans-serif;
+}
+
+/* Editorial Display Typography */
+.font-display-cinzel {
+  font-family: 'Cinzel Decorative', Georgia, serif;
+}
+
+.font-editorial-serif {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sinhala-serif {
+  font-family: 'Noto Serif Sinhala', 'Cormorant Garamond', Georgia, serif;
+  line-height: 1.75;
+}
+
+/* Ambient GPU-Composited Keyframes */
+@keyframes floralSwayTop {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translate3d(0, -5px, 0) rotate(1.5deg);
+  }
+}
+
+@keyframes floralSwayBottom {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(1.4deg);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0) rotate(-1.4deg);
+  }
+}
+
+@keyframes audioRipple {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(1.52);
+    opacity: 0;
+  }
+}
+
+@keyframes ctaBreathe {
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 16px rgba(201, 143, 159, 0.14);
+  }
+  50% {
+    transform: scale(1.022);
+    box-shadow: 0 8px 24px rgba(201, 143, 159, 0.28);
+  }
+}
+
+@keyframes digitTickIn {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -6px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes gentleBounce {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, 5px, 0);
+  }
+}
+
+.floral-ambient-top {
+  animation: floralSwayTop 7.5s var(--ease-ambient) infinite;
+  will-change: transform;
+}
+
+.floral-ambient-bottom {
+  animation: floralSwayBottom 8.2s var(--ease-ambient) infinite;
+  will-change: transform;
+}
+
+.audio-fab-ring {
+  animation: audioRipple 2.4s var(--ease-editorial) infinite;
+  will-change: transform, opacity;
+}
+
+.splash-cta-breathe {
+  animation: ctaBreathe 3s var(--ease-ambient) infinite;
+}
+
+.digit-tick {
+  animation: digitTickIn 220ms var(--ease-editorial) both;
+}
+
+.swipe-chevron {
+  animation: gentleBounce 2.2s var(--ease-ambient) infinite;
+}
+
+/* SVG Rose Line-Draw */
+.rose-stroke-path {
+  stroke-dasharray: var(--path-len, 800);
+  stroke-dashoffset: var(--path-len, 800);
+  opacity: 0.15;
+  transition:
+    stroke-dashoffset 1200ms var(--ease-silk),
+    opacity 900ms var(--ease-silk);
+}
+
+.rose-drawn .rose-stroke-path {
+  stroke-dashoffset: 0;
+  opacity: 1;
+}
+
+/* Dotted Gold Timeline Spine */
+.timeline-dotted-spine {
+  background-image: radial-gradient(circle, #b8965a 1.8px, transparent 2px);
+  background-size: 4px 10px;
+  background-repeat: repeat-y;
+  background-position: center top;
+}
+
+/* Warm Promise Band & Luxury Gradients */
+.bg-promise-band {
+  background: linear-gradient(180deg, #f8eaeb 0%, #eadac0 42%, #c9ba83 78%, #a69864 100%);
+}
+
+.bg-closing-luxury {
+  background: linear-gradient(108deg, #8f825e 0%, #65583d 42%, #3a3021 76%, #261f15 100%);
+}
+
+.bg-footer-luxury {
+  background-color: #2a2318;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(228, 214, 154, 0.6) 0%,
+    #e4d69a 50%,
+    #e4b7c3 100%
+  );
+}
+
+/* Reduced Motion Guardrails */
+@media (prefers-reduced-motion: reduce) {
+  .floral-ambient-top,
+  .floral-ambient-bottom,
+  .audio-fab-ring,
+  .splash-cta-breathe,
+  .digit-tick,
+  .swipe-chevron {
+    animation: none !important;
+  }
+
+  .rose-stroke-path {
+    stroke-dashoffset: 0 !important;
+    opacity: 1 !important;
+    transition: none !important;
+  }
+
+  * {
+    scroll-behavior: auto !important;
+  }
+}
