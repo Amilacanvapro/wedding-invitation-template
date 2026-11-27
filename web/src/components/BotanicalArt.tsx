@@ -2,97 +2,148 @@ import React from 'react';
 
 export const SplashRoseSvg: React.FC<{ drawn: boolean }> = ({ drawn }) => (
   <svg
-    viewBox="0 0 260 360"
+    viewBox="0 0 320 470"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className={`w-60 sm:w-64 h-auto select-none pointer-events-none ${drawn ? 'rose-drawn' : ''}`}
+    className={`w-[92%] max-w-[310px] sm:max-w-[342px] h-full object-contain select-none pointer-events-none ${
+      drawn ? 'rose-drawn' : ''
+    }`}
+    preserveAspectRatio="xMidYMin meet"
     aria-hidden="true"
   >
-    {/* Stem */}
+    {/* Graceful Botanical Stem extending past CTA to bottom arch */}
     <path
-      d="M130 198 C134 248 130 298 134 354"
+      d="M160 250 C166 312 158 386 164 468"
       stroke="#DFD4BE"
-      strokeWidth="1.5"
+      strokeWidth="1.6"
       strokeLinecap="round"
       className="rose-stroke-path"
-      style={{ '--path-len': 200 } as React.CSSProperties}
+      style={{ '--path-len': 240 } as React.CSSProperties}
     />
-    {/* Left Upper Leaf */}
+
+    {/* Left Upper Leaf + Midrib + Veins */}
     <path
-      d="M130 262 C98 228 56 226 16 232 C42 256 80 266 130 262 Z"
-      stroke="#DFD4BE"
-      strokeWidth="1.35"
-      strokeLinejoin="round"
-      className="rose-stroke-path"
-      style={{ '--path-len': 320, transitionDelay: '120ms' } as React.CSSProperties}
-    />
-    <path
-      d="M126 258 C88 242 54 238 26 234"
-      stroke="#DFD4BE"
-      strokeWidth="1"
-      strokeLinecap="round"
-      className="rose-stroke-path"
-      style={{ '--path-len': 140, transitionDelay: '160ms' } as React.CSSProperties}
-    />
-    {/* Left Lower Leaf */}
-    <path
-      d="M126 278 C84 260 44 282 22 322 C66 322 106 306 126 278 Z"
-      stroke="#DFD4BE"
-      strokeWidth="1.35"
-      strokeLinejoin="round"
-      className="rose-stroke-path"
-      style={{ '--path-len': 340, transitionDelay: '180ms' } as React.CSSProperties}
-    />
-    {/* Right Leaf + Veins */}
-    <path
-      d="M133 272 C156 230 196 206 244 208 C222 252 184 284 133 272 Z"
-      stroke="#DFD4BE"
-      strokeWidth="1.35"
-      strokeLinejoin="round"
-      className="rose-stroke-path"
-      style={{ '--path-len': 360, transitionDelay: '220ms' } as React.CSSProperties}
-    />
-    <path
-      d="M133 272 C170 250 202 232 232 216"
-      stroke="#DFD4BE"
-      strokeWidth="1.05"
-      strokeLinecap="round"
-      className="rose-stroke-path"
-      style={{ '--path-len': 160, transitionDelay: '260ms' } as React.CSSProperties}
-    />
-    {/* Outer Rose Petals */}
-    <path
-      d="M130 42 C102 36 74 52 68 78 C46 84 38 112 52 136 C42 162 62 186 92 184 C112 198 152 200 174 184 C206 184 222 158 210 132 C222 108 210 78 188 74 C178 48 154 38 130 42 Z"
+      d="M161 324 C122 282 70 278 16 290 C46 322 96 336 161 324 Z"
       stroke="#DFD4BE"
       strokeWidth="1.45"
       strokeLinejoin="round"
       className="rose-stroke-path"
-      style={{ '--path-len': 720, transitionDelay: '240ms' } as React.CSSProperties}
-    />
-    {/* Secondary Layered Petals */}
-    <path
-      d="M84 96 C78 122 92 154 128 160 C166 164 186 138 180 104 C174 74 146 62 118 68 C98 72 88 82 84 96 Z"
-      stroke="#DFD4BE"
-      strokeWidth="1.35"
-      className="rose-stroke-path"
-      style={{ '--path-len': 420, transitionDelay: '360ms' } as React.CSSProperties}
+      style={{ '--path-len': 380, transitionDelay: '100ms' } as React.CSSProperties}
     />
     <path
-      d="M62 134 C86 154 124 176 168 164 C192 156 202 132 198 110"
+      d="M156 320 C112 302 68 296 28 292"
       stroke="#DFD4BE"
-      strokeWidth="1.25"
+      strokeWidth="1.05"
       strokeLinecap="round"
       className="rose-stroke-path"
-      style={{ '--path-len': 260, transitionDelay: '440ms' } as React.CSSProperties}
+      style={{ '--path-len': 160, transitionDelay: '150ms' } as React.CSSProperties}
     />
-    {/* Inner Rose Swirl */}
+
+    {/* Left Lower Sweeping Leaf + Vein */}
     <path
-      d="M128 116 C120 112 122 100 132 100 C144 100 148 114 140 124 C128 136 106 130 104 112 C102 90 126 78 148 86 C168 94 170 124 152 140 C130 156 96 146 92 120"
+      d="M158 346 C106 326 52 354 24 406 C80 404 130 384 158 346 Z"
+      stroke="#DFD4BE"
+      strokeWidth="1.45"
+      strokeLinejoin="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 400, transitionDelay: '170ms' } as React.CSSProperties}
+    />
+    <path
+      d="M152 350 C110 364 74 380 42 396"
+      stroke="#DFD4BE"
+      strokeWidth="1.05"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 160, transitionDelay: '210ms' } as React.CSSProperties}
+    />
+
+    {/* Right Sweeping Botanical Leaf + Detailed Veins */}
+    <path
+      d="M164 338 C194 282 246 250 306 254 C280 310 232 350 164 338 Z"
+      stroke="#DFD4BE"
+      strokeWidth="1.45"
+      strokeLinejoin="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 430, transitionDelay: '200ms' } as React.CSSProperties}
+    />
+    <path
+      d="M166 336 C212 308 252 284 290 264"
+      stroke="#DFD4BE"
+      strokeWidth="1.1"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 190, transitionDelay: '250ms' } as React.CSSProperties}
+    />
+    <path
+      d="M210 308 C218 290 228 278 242 270 M228 300 C242 304 256 304 270 298 M194 318 C208 326 222 330 238 328"
+      stroke="#DFD4BE"
+      strokeWidth="0.95"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 180, transitionDelay: '290ms' } as React.CSSProperties}
+    />
+
+    {/* Outer Full-Bloom Ruffled Rose Petals */}
+    <path
+      d="M160 22 C122 14 84 34 74 70 C42 78 28 116 46 150 C34 188 60 222 102 220 C128 244 188 248 218 222 C262 222 288 186 272 148 C290 112 272 72 240 66 C226 30 194 16 160 22 Z"
+      stroke="#DFD4BE"
+      strokeWidth="1.6"
+      strokeLinejoin="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 940, transitionDelay: '220ms' } as React.CSSProperties}
+    />
+
+    {/* Outer-Mid Petal Folds (Left & Right) */}
+    <path
+      d="M74 70 C62 104 68 144 96 172 C122 198 176 206 218 184 C252 166 268 130 256 92"
       stroke="#DFD4BE"
       strokeWidth="1.35"
       strokeLinecap="round"
       className="rose-stroke-path"
-      style={{ '--path-len': 380, transitionDelay: '520ms' } as React.CSSProperties}
+      style={{ '--path-len': 480, transitionDelay: '300ms' } as React.CSSProperties}
+    />
+    <path
+      d="M48 148 C78 176 116 214 172 214 C218 214 252 192 270 154"
+      stroke="#DFD4BE"
+      strokeWidth="1.35"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 380, transitionDelay: '350ms' } as React.CSSProperties}
+    />
+    <path
+      d="M92 48 C124 34 186 32 222 58 C248 76 254 114 238 148"
+      stroke="#DFD4BE"
+      strokeWidth="1.3"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 340, transitionDelay: '390ms' } as React.CSSProperties}
+    />
+
+    {/* Secondary Cupped Petals */}
+    <path
+      d="M98 102 C88 138 108 182 156 190 C208 196 236 160 228 114 C220 74 182 56 144 64 C116 70 104 84 98 102 Z"
+      stroke="#DFD4BE"
+      strokeWidth="1.45"
+      className="rose-stroke-path"
+      style={{ '--path-len': 540, transitionDelay: '430ms' } as React.CSSProperties}
+    />
+
+    {/* Inner Velvet Rose Petals & Center Swirl */}
+    <path
+      d="M158 130 C146 124 148 106 162 106 C178 106 184 126 172 140 C156 156 126 148 124 124 C120 94 152 78 184 88 C212 98 216 140 190 162 C160 184 114 170 110 134"
+      stroke="#DFD4BE"
+      strokeWidth="1.45"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 480, transitionDelay: '500ms' } as React.CSSProperties}
+    />
+    <path
+      d="M138 118 C148 96 182 94 194 116 C204 134 190 156 168 160"
+      stroke="#DFD4BE"
+      strokeWidth="1.2"
+      strokeLinecap="round"
+      className="rose-stroke-path"
+      style={{ '--path-len': 210, transitionDelay: '560ms' } as React.CSSProperties}
     />
   </svg>
 );
