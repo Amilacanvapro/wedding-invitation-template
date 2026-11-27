@@ -32,7 +32,7 @@ export const OrderOfEventsSection: React.FC<OrderOfEventsSectionProps> = ({ conf
     >
       <div
         data-reveal
-        className="w-full max-w-[390px] sm:max-w-[440px] rounded-[220px] bg-[#FBF1F3] shadow-editorial border border-[#F3E1E5] px-7 sm:px-12 pt-14 pb-20"
+        className="w-full max-w-[390px] sm:max-w-[440px] rounded-[220px] bg-[#FBF1F3] shadow-editorial border border-[#F3E1E5] px-7 sm:px-12 pt-16 sm:pt-20 pb-20"
       >
         {/* Header */}
         <div className="text-center">
