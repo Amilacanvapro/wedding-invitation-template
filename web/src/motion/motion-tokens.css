@@ -67,6 +67,24 @@ body.splash-locked {
   }
 }
 
+@keyframes audioNoteSway {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(-6deg) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -1.5px, 0) rotate(6deg) scale(1.06);
+  }
+}
+
+@keyframes audioFabHalo {
+  0%, 100% {
+    box-shadow: 0 6px 20px rgba(170, 149, 75, 0.34);
+  }
+  50% {
+    box-shadow: 0 8px 28px rgba(170, 149, 75, 0.56);
+  }
+}
+
 @keyframes ctaBreathe {
   0%, 100% {
     transform: scale(1);
@@ -177,6 +195,25 @@ body.splash-locked {
 
 .audio-fab.is-playing .audio-fab__ring {
   animation: audioRipple 2.4s var(--ease-editorial) infinite;
+}
+
+/* Live Hero Audio FAB Playing vs Muted State Motion */
+[data-audio-fab] button[aria-pressed='true'] {
+  animation: audioFabHalo 2.4s var(--ease-ambient) infinite;
+}
+
+[data-audio-fab] button[aria-pressed='true'] svg {
+  animation: audioNoteSway 2.4s var(--ease-ambient) infinite;
+  transform-origin: center center;
+}
+
+[data-audio-fab] button[aria-pressed='false'] {
+  animation: none;
+  opacity: 0.88;
+}
+
+[data-audio-fab] button[aria-pressed='false'] svg {
+  animation: none;
 }
 
 /* Tactile Press & Interactive States */
@@ -315,6 +352,8 @@ body.splash-locked {
   .cta-breathe,
   .swipe-hint-chevron,
   .audio-fab.is-playing .audio-fab__ring,
+  [data-audio-fab] button[aria-pressed='true'],
+  [data-audio-fab] button[aria-pressed='true'] svg,
   .parting-cloud__inner,
   .countdown-digit.is-ticking,
   .wish-crossfade {

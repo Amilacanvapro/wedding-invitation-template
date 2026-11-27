@@ -3,6 +3,7 @@ import { GuestWish, weddingConfig } from './config/weddingConfig';
 import { fetchApprovedWishes } from './services/rsvpService';
 import { useWeddingAudio } from './hooks/useWeddingAudio';
 import { useMotionSystem } from './motion/useMotionSystem';
+import { AudioFab } from './components/AudioFab';
 import { SplashCover } from './components/sections/SplashCover';
 import { HeroSection } from './components/sections/HeroSection';
 import { CountdownSection } from './components/sections/CountdownSection';
@@ -17,7 +18,7 @@ import { ClosingAndFooter } from './components/sections/ClosingAndFooter';
 export const App: React.FC = () => {
   const [entered, setEntered] = useState(false);
   const [wishes, setWishes] = useState<GuestWish[]>(weddingConfig.wordsOfLove.wishes);
-  const { isPlaying, start, toggle } = useWeddingAudio(weddingConfig.media.audioUrl);
+  const { audioRef, isPlaying, start, toggle } = useWeddingAudio(weddingConfig.media.audioUrl);
 
   useMotionSystem(entered);
 
@@ -31,9 +32,13 @@ export const App: React.FC = () => {
     };
   }, []);
 
+  const handleOpenStart = () => {
+    // Synchronous call inside VIEW INVITATION click handler unlocks browser audio immediately
+    start();
+  };
+
   const handleEnterInvitation = () => {
     setEntered(true);
-    start();
   };
 
   const handleWishAdded = (wish: GuestWish) => {
@@ -42,17 +47,30 @@ export const App: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full bg-[#FFFDFC] text-[#3C2A12] overflow-x-clip">
-      {!entered && (
-        <SplashCover monogram={weddingConfig.monogram} onEnter={handleEnterInvitation} />
+      {/* Persistent in-DOM wedding soundtrack audio element */}
+      {weddingConfig.media.audioUrl && (
+        <audio
+          ref={audioRef}
+          src={weddingConfig.media.audioUrl}
+          loop
+          preload="auto"
+          playsInline
+          aria-label={weddingConfig.media.audioTitle}
+        />
       )}
 
-      <main aria-hidden={!entered}>
-        <HeroSection
-          config={weddingConfig}
-          isAudioPlaying={isPlaying}
-          onToggleAudio={toggle}
-          showFab={entered}
+      {!entered && (
+        <SplashCover
+          monogram={weddingConfig.monogram}
+          onOpenStart={handleOpenStart}
+          onEnter={handleEnterInvitation}
         />
+      )}
+
+      <AudioFab isAudioPlaying={isPlaying} onToggleAudio={toggle} />
+
+      <main aria-hidden={!entered}>
+        <HeroSection config={weddingConfig} />
         <CountdownSection config={weddingConfig} />
         <LoveStorySection config={weddingConfig} />
         <HappyCoupleSection config={weddingConfig} />

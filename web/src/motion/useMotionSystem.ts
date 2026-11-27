@@ -100,10 +100,22 @@ export function useMotionSystem(isUnlocked: boolean) {
         )
         .fromTo(
           '[data-audio-fab]',
-          { opacity: 0, scale: 0.6 },
-          { opacity: 1, scale: 1, duration: 0.45, ease: 'back.out(1.4)' },
-          0.38
+          { scale: 0.9 },
+          { scale: 1, duration: 0.45, ease: 'back.out(1.6)' },
+          0.2
         );
+
+      // Tactile spring feedback on Audio FAB mute/unmute clicks
+      const audioFabBtn = document.querySelector<HTMLButtonElement>('[data-audio-fab] button');
+      const handleAudioFabPulse = () => {
+        if (!audioFabBtn) return;
+        gsap.fromTo(
+          audioFabBtn,
+          { scale: 0.88 },
+          { scale: 1, duration: 0.38, ease: 'back.out(2.2)', overwrite: 'auto' }
+        );
+      };
+      audioFabBtn?.addEventListener('click', handleAudioFabPulse);
 
       // 2. Hero corner floral scroll parallax
       gsap.to('[data-hero-parallax]', {
@@ -460,6 +472,10 @@ export function useMotionSystem(isUnlocked: boolean) {
           );
         }
       }
+
+      return () => {
+        audioFabBtn?.removeEventListener('click', handleAudioFabPulse);
+      };
     });
 
     const refreshTimer = window.setTimeout(() => ScrollTrigger.refresh(), 250);

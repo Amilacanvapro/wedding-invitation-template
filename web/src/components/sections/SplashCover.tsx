@@ -3,10 +3,11 @@ import { SplashRoseSvg } from '../BotanicalArt';
 
 interface SplashCoverProps {
   monogram: string;
+  onOpenStart?: () => void;
   onEnter: () => void;
 }
 
-export const SplashCover: React.FC<SplashCoverProps> = ({ monogram, onEnter }) => {
+export const SplashCover: React.FC<SplashCoverProps> = ({ monogram, onOpenStart, onEnter }) => {
   const [frameVisible, setFrameVisible] = useState(false);
   const [monogramVisible, setMonogramVisible] = useState(false);
   const [roseDrawn, setRoseDrawn] = useState(false);
@@ -38,6 +39,8 @@ export const SplashCover: React.FC<SplashCoverProps> = ({ monogram, onEnter }) =
 
   const handleOpen = () => {
     if (exiting) return;
+    // Start audio synchronously inside the user click gesture so mobile/desktop browsers never block autoplay
+    onOpenStart?.();
     setExiting(true);
     window.setTimeout(() => {
       onEnter();

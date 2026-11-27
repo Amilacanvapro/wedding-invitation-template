@@ -149,7 +149,8 @@ export const weddingConfig: WeddingTemplateConfig = {
     rsvpDeadline: '1st October 2026',
   },
   media: {
-    audioTitle: 'Wedding Ambient Melody',
+    audioUrl: './assets/wedding-music.mp3',
+    audioTitle: 'Jaya Mangala Gatha — Wedding Melody',
   },
   countdown: {
     heading: 'COUNTING DOWN TO FOREVER',

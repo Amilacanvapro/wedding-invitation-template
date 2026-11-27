@@ -1,121 +1,98 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 /**
- * Dual-mode wedding audio controller:
- * - Plays an external audio URL if configured in weddingConfig.media.audioUrl
- * - Falls back to a gentle Web Audio API romantic harp/chime pad so the Audio FAB
- *   always responds gracefully without broken third-party MP3 links.
+ * Reliable in-DOM <audio> wedding soundtrack controller:
+ * - Binds to a real <audio ref={audioRef} loop preload="auto" /> element for 100% iOS/Android/Desktop support
+ * - Must be invoked synchronously inside user click handlers (e.g. VIEW INVITATION / Audio FAB)
+ *   so browser autoplay policies always allow immediate playback
+ * - Single click on Audio FAB mutes/pauses cleanly; clicking again resumes seamlessly from currentTime
  */
 export function useWeddingAudio(audioUrl?: string) {
   const [isPlaying, setIsPlaying] = useState(false);
-  const audioElRef = useRef<HTMLAudioElement | null>(null);
-  const audioCtxRef = useRef<AudioContext | null>(null);
-  const intervalRef = useRef<number | null>(null);
+  const [hasError, setHasError] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  const stopSynth = useCallback(() => {
-    if (intervalRef.current !== null) {
-      window.clearInterval(intervalRef.current);
-      intervalRef.current = null;
-    }
-    if (audioCtxRef.current && audioCtxRef.current.state === 'running') {
-      void audioCtxRef.current.suspend();
-    }
-  }, []);
+  useEffect(() => {
+    const el = audioRef.current;
+    if (!el || !audioUrl) return;
 
-  const startSynth = useCallback(() => {
-    const AudioCtx =
-      window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    if (!AudioCtx) return;
+    el.volume = 0.7;
+    el.loop = true;
 
-    if (!audioCtxRef.current) {
-      audioCtxRef.current = new AudioCtx();
-    }
-    const ctx = audioCtxRef.current;
-    if (ctx.state === 'suspended') {
-      void ctx.resume();
-    }
-
-    // Gentle D-major romantic arpeggio notes
-    const notes = [293.66, 369.99, 440.0, 554.37, 587.33, 440.0, 369.99, 329.63];
-    let step = 0;
-
-    const playNote = () => {
-      if (!audioCtxRef.current || audioCtxRef.current.state !== 'running') return;
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(notes[step % notes.length], now);
-      step += 1;
-
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.032, now + 0.18);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 2.4);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 2.5);
+    const syncState = () => {
+      setIsPlaying(!el.paused && !el.muted);
     };
 
-    playNote();
-    if (intervalRef.current !== null) {
-      window.clearInterval(intervalRef.current);
-    }
-    intervalRef.current = window.setInterval(playNote, 1350);
-  }, []);
+    const handleError = () => {
+      setHasError(true);
+      setIsPlaying(false);
+    };
+
+    const handleCanPlay = () => {
+      setHasError(false);
+    };
+
+    el.addEventListener('play', syncState);
+    el.addEventListener('playing', syncState);
+    el.addEventListener('pause', syncState);
+    el.addEventListener('volumechange', syncState);
+    el.addEventListener('ended', syncState);
+    el.addEventListener('error', handleError);
+    el.addEventListener('canplay', handleCanPlay);
+
+    return () => {
+      el.removeEventListener('play', syncState);
+      el.removeEventListener('playing', syncState);
+      el.removeEventListener('pause', syncState);
+      el.removeEventListener('volumechange', syncState);
+      el.removeEventListener('ended', syncState);
+      el.removeEventListener('error', handleError);
+      el.removeEventListener('canplay', handleCanPlay);
+      el.pause();
+    };
+  }, [audioUrl]);
 
   const start = useCallback(() => {
-    if (audioUrl) {
-      if (!audioElRef.current) {
-        const el = new Audio(audioUrl);
-        el.loop = true;
-        el.volume = 0.45;
-        audioElRef.current = el;
-      }
-      audioElRef.current
-        .play()
-        .then(() => setIsPlaying(true))
-        .catch(() => {
-          startSynth();
-          setIsPlaying(true);
-        });
-      return;
-    }
+    const el = audioRef.current;
+    if (!el || !audioUrl) return;
 
-    try {
-      startSynth();
-      setIsPlaying(true);
-    } catch {
-      setIsPlaying(false);
+    el.muted = false;
+    el.volume = 0.7;
+
+    const playPromise = el.play();
+    if (playPromise !== undefined) {
+      playPromise
+        .then(() => {
+          setHasError(false);
+          setIsPlaying(!el.paused && !el.muted);
+        })
+        .catch(() => {
+          setIsPlaying(false);
+        });
+    } else {
+      setIsPlaying(!el.paused && !el.muted);
     }
-  }, [audioUrl, startSynth]);
+  }, [audioUrl]);
+
+  const mute = useCallback(() => {
+    const el = audioRef.current;
+    if (!el) return;
+    el.muted = true;
+    el.pause();
+    setIsPlaying(false);
+  }, []);
 
   const toggle = useCallback(() => {
-    if (isPlaying) {
-      if (audioElRef.current) {
-        audioElRef.current.pause();
-      }
-      stopSynth();
-      setIsPlaying(false);
+    const el = audioRef.current;
+    if (!el || !audioUrl) return;
+
+    const currentlyAudible = !el.paused && !el.muted;
+    if (currentlyAudible) {
+      mute();
     } else {
       start();
     }
-  }, [isPlaying, start, stopSynth]);
+  }, [audioUrl, mute, start]);
 
-  useEffect(() => {
-    return () => {
-      if (audioElRef.current) {
-        audioElRef.current.pause();
-        audioElRef.current = null;
-      }
-      stopSynth();
-      if (audioCtxRef.current) {
-        void audioCtxRef.current.close();
-        audioCtxRef.current = null;
-      }
-    };
-  }, [stopSynth]);
-
-  return { isPlaying, start, toggle };
+  return { audioRef, isPlaying, hasError, start, mute, toggle };
 }

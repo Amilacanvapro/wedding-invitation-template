@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
-import { ChevronDown, Menu, Music, VolumeX, X } from 'lucide-react';
+import { ChevronDown, Menu, X } from 'lucide-react';
 import { WeddingTemplateConfig } from '../../config/weddingConfig';
 import { WatercolorFloralCorner } from '../BotanicalArt';
 
 interface HeroSectionProps {
   config: WeddingTemplateConfig;
-  isAudioPlaying: boolean;
-  onToggleAudio: () => void;
-  showFab: boolean;
 }
 
-export const HeroSection: React.FC<HeroSectionProps> = ({
-  config,
-  isAudioPlaying,
-  onToggleAudio,
-  showFab,
-}) => {
+export const HeroSection: React.FC<HeroSectionProps> = ({ config }) => {
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   const navItems = [
@@ -121,34 +113,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           <ChevronDown className="w-4 h-4 swipe-chevron" strokeWidth={1.75} />
         </a>
       </section>
-
-      {/* Fixed Bottom-Right Audio FAB */}
-      {showFab && (
-        <div
-          data-audio-fab
-          className="fixed bottom-6 right-6 z-40 flex items-center justify-center"
-        >
-          {isAudioPlaying && (
-            <span
-              className="audio-fab-ring absolute inset-0 rounded-full bg-[#AA954B]/45 pointer-events-none"
-              aria-hidden="true"
-            />
-          )}
-          <button
-            type="button"
-            onClick={onToggleAudio}
-            aria-label={isAudioPlaying ? 'Mute wedding music' : 'Play wedding music'}
-            aria-pressed={isAudioPlaying}
-            className="relative flex items-center justify-center w-12 h-12 rounded-full bg-[#AA954B] text-[#FAF6EE] shadow-lg hover:bg-[#96823F] active:scale-[0.95] transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#AA954B] focus-visible:ring-offset-2"
-          >
-            {isAudioPlaying ? (
-              <Music className="w-5 h-5" strokeWidth={1.85} />
-            ) : (
-              <VolumeX className="w-5 h-5" strokeWidth={1.85} />
-            )}
-          </button>
-        </div>
-      )}
     </>
   );
 };
