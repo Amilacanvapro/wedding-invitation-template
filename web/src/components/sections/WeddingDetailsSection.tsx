@@ -27,7 +27,7 @@ export const WeddingDetailsSection: React.FC<WeddingDetailsSectionProps> = ({ co
         {/* Tall Arched Venue Card */}
         <div
           data-reveal
-          className="mt-14 w-full max-w-[420px] sm:max-w-[520px] rounded-t-[260px] rounded-b-2xl bg-[#FFFDFB] border-[4px] border-[#F4DFEA] shadow-editorial px-6 sm:px-12 pt-16 sm:pt-20 pb-14 relative overflow-hidden"
+          className="mt-14 w-full max-w-[420px] sm:max-w-[520px] rounded-t-[260px] rounded-b-2xl bg-[#FFFDFB] border-[4px] border-[#F4DFEA] shadow-editorial px-8 sm:px-14 pt-36 sm:pt-40 pb-14 relative overflow-hidden"
         >
           {/* Soft atmospheric venue wash matching reference mix-blend-multiply backdrop */}
           <img
@@ -43,7 +43,7 @@ export const WeddingDetailsSection: React.FC<WeddingDetailsSectionProps> = ({ co
           />
 
           <div className="relative z-10 flex flex-col items-center">
-            <h3 className="font-sans text-[#7A6145] text-[24px] sm:text-[32px] leading-[1.28] tracking-[0.08em] uppercase font-normal max-w-[340px]">
+            <h3 className="font-sans text-[#7A6145] text-[21px] sm:text-[30px] leading-[1.34] tracking-[0.08em] uppercase font-normal max-w-[230px] sm:max-w-[340px]">
               {config.event.ceremonyTitle}
             </h3>
 
