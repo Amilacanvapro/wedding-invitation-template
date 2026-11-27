@@ -67,7 +67,7 @@ export const App: React.FC = () => {
         />
       )}
 
-      <AudioFab isAudioPlaying={isPlaying} onToggleAudio={toggle} />
+      {entered && <AudioFab isAudioPlaying={isPlaying} onToggleAudio={toggle} />}
 
       <main aria-hidden={!entered}>
         <HeroSection config={weddingConfig} />
